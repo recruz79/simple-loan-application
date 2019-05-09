@@ -9,8 +9,8 @@ import java.io.Serializable;
  * Created by recruz.
  */
 @Entity
-@Table(name = "LOAN_APPLICATION")
-public class LoanApplication implements Serializable {
+@Table(name = "LOAN")
+public class Loan implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,7 +29,10 @@ public class LoanApplication implements Serializable {
     @Column(name = "TERM")
     private Long term;
 
-    public LoanApplication(String firstname, String surname, Long amount, Long term) {
+    @Column(name = "REMOTE_ADDRESS")
+    private String remoteAddress;
+
+    public Loan(String firstname, String surname, Long amount, Long term) {
         this.firstname = firstname;
         this.surname = surname;
         this.amount = amount;
@@ -68,14 +71,22 @@ public class LoanApplication implements Serializable {
         this.term = term;
     }
 
-    public LoanApplication(){}
+    public Loan(){}
 
     public Long getId() {
         return id;
     }
 
+    public String getRemoteAddress() {
+        return remoteAddress;
+    }
+
+    public void setRemoteAddress(String remoteAddress) {
+        this.remoteAddress = remoteAddress;
+    }
+
     @Override
     public String toString() {
-        return String.format("LoanApplication [firstname=%s, surname=%s, amount=%d, term=%d] ", firstname, surname, amount, term);
+        return String.format("Loan [firstname=%s, surname=%s, amount=%d, term=%d] ", firstname, surname, amount, term);
     }
 }

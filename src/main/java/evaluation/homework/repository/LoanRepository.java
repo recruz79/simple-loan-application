@@ -1,6 +1,6 @@
 package evaluation.homework.repository;
 
-import evaluation.homework.domain.LoanApplication;
+import evaluation.homework.domain.Loan;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
@@ -8,8 +8,8 @@ import java.util.List;
 /**
  * Created by recruz.
  */
-public interface LoanRepository extends CrudRepository<LoanApplication, Long> {
+public interface LoanRepository extends CrudRepository<Loan, Long> {
 
-   List<LoanApplication> findBySurname(String surname);
+   List<Loan> findBySurname(String surname);
 
 }

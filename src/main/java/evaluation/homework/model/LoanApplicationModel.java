@@ -12,6 +12,7 @@ public class LoanApplicationModel {
     private String surName;
     private BigDecimal amount;
     private Long term;
+    private String remoteAddress;
 
     public LoanApplicationModel(String firstName, String surName, BigDecimal amount, Long term) {
         this.firstName = firstName;
@@ -61,5 +62,13 @@ public class LoanApplicationModel {
 
     public void setTerm(Long term) {
         this.term = term;
+    }
+
+    public String getRemoteAddress() {
+        return remoteAddress;
+    }
+
+    public void setRemoteAddress(String remoteAddress) {
+        this.remoteAddress = remoteAddress;
     }
 }
