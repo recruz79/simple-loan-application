@@ -14,9 +14,9 @@ Based on the Model data the loan will be processed according to risk levels from
 
 #### Endpoints :
 
-- POST http:\\localhost:8080\loan : Creates a loan by getting a LoanApplicationModel and pass validations
+- POST http:\\localhost:8080\loan : Creates a loan by getting a LoanApplicationModel and pass validations.
 
-- GET http:\\localhost:8080\loans : Returns all the existing loans in the database
+- GET http:\\localhost:8080\loans : Returns all the existing loans in the database.
 
 #### Validations:
 
@@ -26,9 +26,9 @@ Based on the Model data the loan will be processed according to risk levels from
 
 #### Return values:
 
-- If the Loan Application is approved there will be a return string of:
-    "The loan is approved with the id: X"
-- Otherwise the return will be "Rejected"
+- "The loan is approved with the id: X" : If the Loan Application by passing all the validations.
+
+- "Rejected" : In case of validations failures and the loan is rejected.
 
 
 #### Technologies Stack:
