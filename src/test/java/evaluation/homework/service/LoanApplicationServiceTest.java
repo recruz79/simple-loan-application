@@ -35,7 +35,7 @@ public class LoanApplicationServiceTest {
     @Test
     public void sendLoanApplicationThenApproved() throws Exception {
         LoanApplicationModel loanApplicationModel =
-                new LoanApplicationModel("Pepe", "Martinez", new BigDecimal(12), 30L);
+                new LoanApplicationModel("Mauro", "Martinez", new BigDecimal(12), 30L);
 
         String result = loanApplicationService.processLoan(loanApplicationModel, "");
         assertThat(result, not(equalTo("rejected")));
@@ -44,9 +44,9 @@ public class LoanApplicationServiceTest {
     @Test
     public void sendLoanApplicationRejectedByRiskyHours() throws Exception {
         LoanApplicationModel loanApplicationModel =
-                new LoanApplicationModel("Pepe", "Martinez", new BigDecimal(12), 30L);
+                new LoanApplicationModel("Pedro", "Obongo", new BigDecimal(150000), 30L);
 
-        String result = loanApplicationService.processLoan(loanApplicationModel, "");
+        String result = loanApplicationService.processLoan(loanApplicationModel, "127.0.0.1");
         assertThat(result, equalTo("rejected"));
     }
 }

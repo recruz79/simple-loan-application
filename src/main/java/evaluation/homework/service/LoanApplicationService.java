@@ -9,7 +9,7 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.time.Clock;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -27,10 +27,11 @@ public class LoanApplicationService {
     public static final LocalTime RISK_TIME_START = LocalTime.of(0, 0);
     public static final LocalTime RISK_TIME_END = LocalTime.of(6, 0);
     public static final int LOW_RISK = 0;
+    public static final BigDecimal MAXIMUN_AMOUNT = new BigDecimal(120000);
     private final Integer MAX_NUMBER_OF_ATTEMPTS = 3;
 
 
-    public LoanApplicationService(Clock clock) {
+    protected LoanApplicationService(Clock clock) {
         this.clock = clock;
     }
 
@@ -48,7 +49,7 @@ public class LoanApplicationService {
         String message;
 
         loanRiskLevel += verifyMaxAttemptsReached(remoteAddress) ? 1 : 0;
-        loanRiskLevel += verifyLoanRiskyHours() ? 1 : 0;
+        loanRiskLevel += verifyLoanRiskyHoursWithMaxAmount(loanApplicationModel.getAmount()) ? 1 : 0;
 
 
         if (loanRiskLevel == LOW_RISK) {
@@ -67,18 +68,16 @@ public class LoanApplicationService {
         List<ApplicationAttempt> result = applicationAttemptRepository
                 .findByRemoteAddressAndApplicationDate(remoteAddressIp, LocalDate.now(clock));
 
-        if (result.size() >= MAX_NUMBER_OF_ATTEMPTS) {
-            return true;
-        }
-
-        return false;
+        return (result.size() >= MAX_NUMBER_OF_ATTEMPTS) ? true : false;
     }
 
-    private boolean verifyLoanRiskyHours() {
+    private boolean verifyLoanRiskyHoursWithMaxAmount(BigDecimal amount) {
         LocalTime currentTime = LocalTime.now(clock);
 
-        if (currentTime.isAfter(RISK_TIME_START) && currentTime.isBefore(RISK_TIME_END)) {
-            System.out.println("Im inside the interval!!");
+        if (currentTime.isAfter(RISK_TIME_START) &&
+                currentTime.isBefore(RISK_TIME_END) &&
+                amount.compareTo(MAXIMUN_AMOUNT) >= 0) {
+            System.out.println("Im inside the interval with maximum amount!!");
             return true;
         }
 
