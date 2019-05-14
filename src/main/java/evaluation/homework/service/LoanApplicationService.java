@@ -8,17 +8,32 @@ import evaluation.homework.repository.LoanRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.Clock;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class LoanApplicationService {
 
+    private Clock clock = Clock.systemDefaultZone();
     private static final Logger logger = LoggerFactory.getLogger(LoanApplicationService.class);
-
+    public static final LocalTime RISK_TIME_START = LocalTime.of(0, 0);
+    public static final LocalTime RISK_TIME_END = LocalTime.of(6, 0);
     public static final int LOW_RISK = 0;
+    private final Integer MAX_NUMBER_OF_ATTEMPTS = 3;
+
+
+    public LoanApplicationService(Clock clock) {
+        this.clock = clock;
+    }
+
+    LoanApplicationService() {
+    }
 
     @Autowired
     private ApplicationAttemptRepository applicationAttemptRepository;
@@ -26,10 +41,7 @@ public class LoanApplicationService {
     @Autowired
     private LoanRepository loanRepository;
 
-    private final Integer MAX_NUMBER_OF_ATTEMPTS = 3;
 
-    public static final LocalTime RISK_TIME_START = LocalTime.of(0, 0);
-    public static final LocalTime RISK_TIME_END = LocalTime.of(6, 0);
 
     public String processLoan(LoanApplicationModel loanApplicationModel, HttpServletRequest request) {
         int risk = 0;
@@ -52,7 +64,7 @@ public class LoanApplicationService {
 
     private boolean verifyMaxAttemptsReached(String remoteAddressIp) {
         List<ApplicationAttempt> result = applicationAttemptRepository
-                .findByRemoteAddressAndCreatedDateEqualsLocalDate(remoteAddressIp, LocalDate.now());
+                .findByRemoteAddressAndApplicationDate(remoteAddressIp, LocalDate.now(clock));
 
         if (result.size() >= MAX_NUMBER_OF_ATTEMPTS) {
             return true;
@@ -61,7 +73,7 @@ public class LoanApplicationService {
     }
 
     private boolean verifyLoanRiskyHours() {
-        LocalTime currentTime = LocalTime.now();
+        LocalTime currentTime = LocalTime.now(clock);
 
         if (currentTime.isAfter(RISK_TIME_START) && currentTime.isBefore(RISK_TIME_END)) {
             System.out.println("Im inside the interval!!");
@@ -85,5 +97,13 @@ public class LoanApplicationService {
     private void addApplicationAttempt(String clientRemoteAddress) {
         ApplicationAttempt applicationAttempt = new ApplicationAttempt(clientRemoteAddress);
         applicationAttemptRepository.save(applicationAttempt);
+    }
+
+    public List<Loan> getAllLoans() {
+        List<Loan> result = new ArrayList<>();
+        for (Loan loan: loanRepository.findAll()) {
+            result.add(loan);
+        }
+        return result;
     }
 }

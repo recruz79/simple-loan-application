@@ -1,5 +1,6 @@
 package evaluation.homework.controller;
 
+import evaluation.homework.domain.Loan;
 import evaluation.homework.model.LoanApplicationModel;
 import evaluation.homework.service.LoanApplicationService;
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by recruz.
@@ -24,10 +26,14 @@ public class LoanApplicationController {
     @RequestMapping(value = "/loan", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> loan(@RequestBody LoanApplicationModel loanApplicationModel, HttpServletRequest request) {
-
         String result = loanApplicationService.processLoan(loanApplicationModel, request);
-
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/loans", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public List<Loan> getAllLoans() {
+        List<Loan> result = loanApplicationService.getAllLoans();
+        return result ;
+    }
 }

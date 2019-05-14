@@ -1,7 +1,5 @@
 package evaluation.homework.domain;
 
-import org.springframework.boot.autoconfigure.web.ResourceProperties;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -9,12 +7,11 @@ import java.io.Serializable;
  * Created by recruz.
  */
 @Entity
-@Table(name = "LOAN")
+@Table(name = "LOAN_APPLICATION")
 public class Loan implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "LOAN_REFERENCE_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "FIRSTNAME")
@@ -28,9 +25,6 @@ public class Loan implements Serializable {
 
     @Column(name = "TERM")
     private Long term;
-
-    @Column(name = "REMOTE_ADDRESS")
-    private String remoteAddress;
 
     public Loan(String firstname, String surname, Long amount, Long term) {
         this.firstname = firstname;
@@ -77,12 +71,8 @@ public class Loan implements Serializable {
         return id;
     }
 
-    public String getRemoteAddress() {
-        return remoteAddress;
-    }
-
-    public void setRemoteAddress(String remoteAddress) {
-        this.remoteAddress = remoteAddress;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override

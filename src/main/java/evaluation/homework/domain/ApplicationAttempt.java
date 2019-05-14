@@ -1,8 +1,6 @@
 package evaluation.homework.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -13,18 +11,36 @@ import java.time.LocalDate;
 @Table(name = "APPLICATION_ATTEMPT")
 public class ApplicationAttempt implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(name = "REMOTE_ADDRESS")
     private String remoteAddress;
 
-    @Column(name = "DATE")
-    private LocalDate createdDate;
+    @Column(name = "APPLICATION_DATE")
+    private LocalDate applicationDate;
 
     public ApplicationAttempt() {
     }
 
+    public ApplicationAttempt(Long id, String remoteAddress, LocalDate applicationDate) {
+        this.id = id;
+        this.remoteAddress = remoteAddress;
+        this.applicationDate = applicationDate;
+    }
+
     public ApplicationAttempt(String clientRemoteAddress) {
         this.remoteAddress = clientRemoteAddress;
-        this.createdDate = LocalDate.now();
+        this.applicationDate = LocalDate.now();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getRemoteAddress() {
@@ -35,12 +51,11 @@ public class ApplicationAttempt implements Serializable {
         this.remoteAddress = remoteAddress;
     }
 
-    public LocalDate getCreatedDate() {
-        return createdDate;
+    public LocalDate getApplicationDate() {
+        return applicationDate;
     }
 
-    public void setCreatedDate(LocalDate date) {
-        this.createdDate = date;
+    public void setApplicationDate(LocalDate applicationDate) {
+        this.applicationDate = applicationDate;
     }
-
 }
