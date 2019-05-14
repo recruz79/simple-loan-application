@@ -3,8 +3,6 @@ package evaluation.homework.controller;
 import evaluation.homework.domain.Loan;
 import evaluation.homework.model.LoanApplicationModel;
 import evaluation.homework.service.LoanApplicationService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +24,7 @@ public class LoanApplicationController {
     @RequestMapping(value = "/loan", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> loan(@RequestBody LoanApplicationModel loanApplicationModel, HttpServletRequest request) {
-        String result = loanApplicationService.processLoan(loanApplicationModel, request);
+        String result = loanApplicationService.processLoan(loanApplicationModel, request.getRemoteAddr());
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

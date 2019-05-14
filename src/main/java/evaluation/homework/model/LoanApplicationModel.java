@@ -1,10 +1,13 @@
 package evaluation.homework.model;
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 
 /**
  * Created by recruz.
  */
+@Data
 public class LoanApplicationModel {
 
     private Long loanReferenceId;
@@ -21,54 +24,4 @@ public class LoanApplicationModel {
         this.term = term;
     }
 
-    public LoanApplicationModel() {
-    }
-
-    public Long getLoanReferenceId() {
-        return loanReferenceId;
-    }
-
-    public void setLoanReferenceId(Long loanReferenceId) {
-        this.loanReferenceId = loanReferenceId;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getSurName() {
-        return surName;
-    }
-
-    public void setSurName(String surName) {
-        this.surName = surName;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public Long getTerm() {
-        return term;
-    }
-
-    public void setTerm(Long term) {
-        this.term = term;
-    }
-
-    public String getRemoteAddress() {
-        return remoteAddress;
-    }
-
-    public void setRemoteAddress(String remoteAddress) {
-        this.remoteAddress = remoteAddress;
-    }
 }

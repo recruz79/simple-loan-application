@@ -1,5 +1,7 @@
 package evaluation.homework.domain;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -7,6 +9,7 @@ import java.time.LocalDate;
 /**
  * Created by recruz.
  */
+@Data
 @Entity
 @Table(name = "APPLICATION_ATTEMPT")
 public class ApplicationAttempt implements Serializable {
@@ -21,41 +24,11 @@ public class ApplicationAttempt implements Serializable {
     @Column(name = "APPLICATION_DATE")
     private LocalDate applicationDate;
 
-    public ApplicationAttempt() {
-    }
-
-    public ApplicationAttempt(Long id, String remoteAddress, LocalDate applicationDate) {
-        this.id = id;
-        this.remoteAddress = remoteAddress;
-        this.applicationDate = applicationDate;
-    }
-
     public ApplicationAttempt(String clientRemoteAddress) {
         this.remoteAddress = clientRemoteAddress;
         this.applicationDate = LocalDate.now();
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getRemoteAddress() {
-        return remoteAddress;
-    }
-
-    public void setRemoteAddress(String remoteAddress) {
-        this.remoteAddress = remoteAddress;
-    }
-
-    public LocalDate getApplicationDate() {
-        return applicationDate;
-    }
-
-    public void setApplicationDate(LocalDate applicationDate) {
-        this.applicationDate = applicationDate;
+    public ApplicationAttempt() {
     }
 }
