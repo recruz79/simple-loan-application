@@ -1,6 +1,9 @@
 # simple-loan-application
 
-This is a simple Loan application which process loans based on an JSON model as shown below:
+This is a simple Loan application which process loans based on LoanApplicationModel, the loan will be processed according to risk levels from LOW LEVEL to HIGH LEVEL by using a risk accumulator, if the Loan succeds to have a low risk it will be saved in the repository and will get a Loan Id by wich the user can follow up the status of the loan.
+
+#### LoanApplicationModel JSON:
+
 
     {
         "firstName" : "Pedro",
@@ -10,7 +13,7 @@ This is a simple Loan application which process loans based on an JSON model as 
     }
 
 
-Based on the Model data the loan will be processed according to risk levels from LOW LEVEL to HIGH LEVEL.
+
 
 #### Endpoints :
 
@@ -29,6 +32,7 @@ Based on the Model data the loan will be processed according to risk levels from
 - "The loan is approved with the id: X" : If the Loan Application by passing all the validations.
 
 - "Rejected" : In case of validations failures and the loan is rejected.
+
 
 
 #### Technologies Stack:
