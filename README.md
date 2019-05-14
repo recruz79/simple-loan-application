@@ -1,6 +1,6 @@
 # simple-loan-application
 
-This is a simple Loan application which process Loans based on an JSON Request model as shown below:
+This is a simple Loan application which process loans based on an JSON model as shown below:
 
     {
         "firstName" : "Pedro",
@@ -12,11 +12,16 @@ This is a simple Loan application which process Loans based on an JSON Request m
 
 Based on the Model data the loan will be processed according to risk levels from LOW LEVEL to HIGH LEVEL.
 
+#### Endpoints :
+
+- POST http:\\localhost:8080\loan : Creates a loan by getting a LoanApplicationModel and pass validations
+
+- GET http:\\localhost:8080\loans : Returns all the existing loans in the database
 
 #### Validations:
 
-- Check loan application is not being applied from 00:00hrs to 06:00hrs
-- Verify the same ip address is not applying a loan more than three times
+- Check loan application is not being applied from 00:00hrs to 06:00hrs using the maximum amount.
+- Verify the same ip address is not applying a loan more than three times.
 
 
 #### Return values:
