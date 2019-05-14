@@ -21,6 +21,9 @@ import java.util.List;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Created by recruz.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class LoanApplicationControllerTest {
@@ -45,7 +48,6 @@ public class LoanApplicationControllerTest {
         URL url = new URL(baseURL, "loan");
         RequestEntity<LoanApplicationModel> request = RequestEntity.post(url.toURI())
                 .contentType(MediaType.APPLICATION_JSON).body(loanApplicationModel);
-
         ResponseEntity<String> response = template.exchange(request, String.class);
         assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
         assertThat(response.getBody(), equalTo("rejected"));

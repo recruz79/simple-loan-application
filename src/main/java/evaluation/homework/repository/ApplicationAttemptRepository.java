@@ -7,10 +7,12 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Created by recruz.
+ */
 @Repository
 public interface ApplicationAttemptRepository extends CrudRepository<ApplicationAttempt, Long> {
 
-    // find By RemoteAddress and Equals to Current LocalDate findByRemoteAddressAndApplicationDate
     List<ApplicationAttempt> findByRemoteAddressAndApplicationDate(String remoteAddress, LocalDate applicationDate);
 
 }

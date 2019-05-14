@@ -16,6 +16,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by recruz.
+ */
 @Log
 @Service
 public class LoanApplicationService {

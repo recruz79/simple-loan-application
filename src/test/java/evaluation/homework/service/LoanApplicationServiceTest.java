@@ -13,7 +13,9 @@ import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-
+/**
+ * Created by recruz.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class LoanApplicationServiceTest {
