@@ -27,7 +27,7 @@ public class LoanApplicationService {
     public static final LocalTime RISK_TIME_START = LocalTime.of(0, 0);
     public static final LocalTime RISK_TIME_END = LocalTime.of(6, 0);
     public static final int LOW_RISK = 0;
-    public static final BigDecimal MAXIMUN_AMOUNT = new BigDecimal(120000);
+    public static final BigDecimal MAXIMUM_AMOUNT = new BigDecimal(120000);
     private final Integer MAX_NUMBER_OF_ATTEMPTS = 3;
 
 
@@ -76,7 +76,7 @@ public class LoanApplicationService {
 
         if (currentTime.isAfter(RISK_TIME_START) &&
                 currentTime.isBefore(RISK_TIME_END) &&
-                amount.compareTo(MAXIMUN_AMOUNT) >= 0) {
+                amount.compareTo(MAXIMUM_AMOUNT) >= 0) {
             System.out.println("Im inside the interval with maximum amount!!");
             return true;
         }
